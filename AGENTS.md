@@ -19,7 +19,7 @@ Always write code in a way that is human readable and includes comments. When ta
 Before creating or changing more than 500 total lines, pause and check in with me. This includes new scaffold files, CSS, README changes, and config files.
 
 ## Working Style
-Never store API keys directly in my files and store them safely instead. At the start of each project session, review the code base for common AI errors that might need to be fixed.
+Never store API keys directly in my files and store them safely instead. At the start of each project session, review the code base for common AI errors that might need to be fixed. Also review `CHANGELOG.md` and confirm the changes from the last session were added to the log.
 
 Some project commands may need approval because this environment uses a sandbox. `npm install` may need network permission, and `npm run dev` may need permission to start a local server. If a command hangs silently, stop and explain what happened before retrying.
 
