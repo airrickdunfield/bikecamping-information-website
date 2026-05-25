@@ -23,5 +23,7 @@ Never store API keys directly in my files and store them safely instead. At the 
 
 Some project commands may need approval because this environment uses a sandbox. `npm install` may need network permission, and `npm run dev` may need permission to start a local server. If a command hangs silently, stop and explain what happened before retrying.
 
+When `npm run dev` is started so the in-app browser can show the site, leave that dev server running for the rest of the working session unless the user explicitly asks you to stop it. If the site becomes unreachable at `http://127.0.0.1:5173/`, check whether the dev server is still running and restart it before assuming there is an app bug.
+
 ## Context files and websites
 The map uses a CSS library and style that mimics old monochrome macs and that address is map.youcanseethestarsfromhere.ca if you would to reference that. Please keep the style similar here. The design system is called System.css if you need to reference it.

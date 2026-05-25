@@ -65,9 +65,14 @@ function App() {
 
   return (
     <>
-      <nav aria-label="Main navigation">
+      <nav className="site-menu" aria-label="Main navigation">
         <ul role="menu-bar">
-          <li role="menu-item" tabIndex="0" aria-haspopup="false">
+          <li
+            className={currentPath === homePath ? "is-active" : undefined}
+            role="menu-item"
+            tabIndex="0"
+            aria-haspopup="false"
+          >
             <a
               href={homePath}
               aria-current={currentPath === homePath ? "page" : undefined}
@@ -76,7 +81,12 @@ function App() {
               Bikecamping BC
             </a>
           </li>
-          <li role="menu-item" tabIndex="0" aria-haspopup="false">
+          <li
+            className={currentPath === "/about" ? "is-active" : undefined}
+            role="menu-item"
+            tabIndex="0"
+            aria-haspopup="false"
+          >
             <a
               href="/about"
               aria-current={currentPath === "/about" ? "page" : undefined}
@@ -85,8 +95,14 @@ function App() {
               About
             </a>
           </li>
-          <li role="menu-item" tabIndex="0" aria-haspopup="true">
+          <li
+            className={isGearRoute ? "is-active" : undefined}
+            role="menu-item"
+            tabIndex="0"
+            aria-haspopup="true"
+          >
             <a
+              className="has-dropdown"
               href="/gear"
               aria-current={isGearRoute ? "page" : undefined}
               onClick={(event) => navigateTo(event, "/gear")}
@@ -107,7 +123,12 @@ function App() {
               ))}
             </ul>
           </li>
-          <li role="menu-item" tabIndex="0" aria-haspopup="false">
+          <li
+            className={currentPath === "/community" ? "is-active" : undefined}
+            role="menu-item"
+            tabIndex="0"
+            aria-haspopup="false"
+          >
             <a
               href="/community"
               aria-current={currentPath === "/community" ? "page" : undefined}

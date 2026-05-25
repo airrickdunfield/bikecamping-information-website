@@ -1,0 +1,82 @@
+/* Layout only: System.css still controls the retro Mac visual style. */
+:root {
+  --site-width: 960px;
+}
+
+body {
+  margin: 0;
+}
+
+#root {
+  width: min(calc(100% - 32px), var(--site-width));
+  margin: 0 auto;
+  padding: 0 0 32px;
+}
+
+#root *,
+#root *::before,
+#root *::after {
+  box-sizing: border-box;
+}
+
+.site-menu {
+  width: 100vw;
+  margin-left: calc(50% - 50vw);
+  border-bottom: 1px solid #000;
+  background: #fff;
+}
+
+.site-menu ul[role="menu-bar"] {
+  flex-wrap: wrap;
+  width: min(calc(100% - 32px), var(--site-width));
+  margin: 0 auto;
+  background: #fff;
+}
+
+.site-menu > ul[role="menu-bar"] {
+  background: #fff;
+}
+
+.site-menu > ul[role="menu-bar"] > [role="menu-item"] {
+  color: #000;
+}
+
+.site-menu > ul[role="menu-bar"] > [role="menu-item"]:hover,
+.site-menu > ul[role="menu-bar"] > [role="menu-item"]:focus-within {
+  background: #000;
+  color: #fff;
+}
+
+.site-menu > ul[role="menu-bar"] > [role="menu-item"].is-active {
+  background: #000;
+  color: #fff;
+}
+
+.site-menu a {
+  color: inherit;
+  text-decoration: none;
+}
+
+.site-menu [aria-haspopup="true"]:hover > ul[role="menu"] {
+  display: block;
+}
+
+.site-menu .has-dropdown::after {
+  content: "▼";
+  display: inline-block;
+  margin-left: 4px;
+  font-size: 0.45em;
+  line-height: 1;
+  transform: translateY(-1px);
+}
+
+.window,
+.standard-dialog {
+  width: 100%;
+  min-width: 0;
+  margin: 16px 0;
+}
+
+.field-row {
+  flex-wrap: wrap;
+}
