@@ -21,6 +21,8 @@
 - Changed the header into a full-width black bar with grid-aligned menu content and a white active state.
 - Switched the header menu to a white bar with black text and added a down-caret dropdown indicator.
 - Made the Gear dropdown open on hover as well as keyboard focus.
+- Added a `1.25` type scale factor for the menu, window content, buttons, and dialog text.
+- Set page body text to `16px` and applied the `1.25` type scale to page headings.
 - Updated `AGENTS.md` to keep the local dev server running during active browser work.
 
 ### Fixed
