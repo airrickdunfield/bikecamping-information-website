@@ -1,7 +1,21 @@
-# bikecamping-information-website
+# Bikecamping Information Website
 
 ## Description
-A informational website that discusses how to get started with bikecamping in Vancouver BC Canada
+An informational website about how to get started with bike camping in
+Vancouver, BC and nearby areas.
 
 ## Technology
-This is a project built with React.js
+This project is built with React and Vite.
+
+## Getting Started
+Install the project dependencies:
+
+```bash
+npm install
+```
+
+Start the local development server:
+
+```bash
+npm run dev
+```
