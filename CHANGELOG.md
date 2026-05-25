@@ -14,6 +14,7 @@
 - Updated the README with setup and local development instructions.
 - Updated `AGENTS.md` with React/Vite setup guidance, sandbox command notes, and clearer check-in rules for larger edits.
 - Replaced section-anchor navigation with URL-based page navigation.
+- Replaced the custom site styling bundle with System.css classes and the System.css CDN stylesheet.
 
 ### Fixed
 - Added `vite.config.js` so React JSX builds and renders correctly in development.

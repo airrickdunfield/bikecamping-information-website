@@ -1,5 +1,7 @@
 import { useEffect, useState } from "react";
 
+const homePath = "/";
+
 const gearPages = [
   {
     title: "Bikes",
@@ -26,7 +28,7 @@ const beginnerSteps = [
 ];
 
 const routes = [
-  { path: "/" },
+  { path: homePath },
   { path: "/about" },
   { path: "/gear" },
   { path: "/community" },
@@ -62,30 +64,28 @@ function App() {
   const isGearRoute = currentPath === "/gear" || currentPath.startsWith("/gear/");
 
   return (
-    <div className="site-shell">
-      <header className="site-header">
-        <a
-          className="brand"
-          href="/"
-          onClick={(event) => navigateTo(event, "/")}
-          aria-label="Bikecamping BC home"
-        >
-          <span className="brand-icon" aria-hidden="true">
-            BC
-          </span>
-          <span>Bikecamping BC</span>
-        </a>
-
-        <nav className="site-nav" aria-label="Main navigation">
-          <a
-            href="/about"
-            aria-current={currentPath === "/about" ? "page" : undefined}
-            onClick={(event) => navigateTo(event, "/about")}
-          >
-            About
-          </a>
-
-          <div className="nav-dropdown">
+    <>
+      <nav aria-label="Main navigation">
+        <ul role="menu-bar">
+          <li role="menu-item" tabIndex="0" aria-haspopup="false">
+            <a
+              href={homePath}
+              aria-current={currentPath === homePath ? "page" : undefined}
+              onClick={(event) => navigateTo(event, homePath)}
+            >
+              Bikecamping BC
+            </a>
+          </li>
+          <li role="menu-item" tabIndex="0" aria-haspopup="false">
+            <a
+              href="/about"
+              aria-current={currentPath === "/about" ? "page" : undefined}
+              onClick={(event) => navigateTo(event, "/about")}
+            >
+              About
+            </a>
+          </li>
+          <li role="menu-item" tabIndex="0" aria-haspopup="true">
             <a
               href="/gear"
               aria-current={isGearRoute ? "page" : undefined}
@@ -93,32 +93,34 @@ function App() {
             >
               Gear
             </a>
-            <div className="dropdown-menu" aria-label="Gear pages">
+            <ul role="menu">
               {gearPages.map((page) => (
-                <a
-                  href={page.path}
-                  key={page.path}
-                  aria-current={currentPath === page.path ? "page" : undefined}
-                  onClick={(event) => navigateTo(event, page.path)}
-                >
-                  {page.title}
-                </a>
+                <li role="menu-item" key={page.path}>
+                  <a
+                    href={page.path}
+                    aria-current={currentPath === page.path ? "page" : undefined}
+                    onClick={(event) => navigateTo(event, page.path)}
+                  >
+                    {page.title}
+                  </a>
+                </li>
               ))}
-            </div>
-          </div>
-
-          <a
-            href="/community"
-            aria-current={currentPath === "/community" ? "page" : undefined}
-            onClick={(event) => navigateTo(event, "/community")}
-          >
-            Community
-          </a>
-        </nav>
-      </header>
+            </ul>
+          </li>
+          <li role="menu-item" tabIndex="0" aria-haspopup="false">
+            <a
+              href="/community"
+              aria-current={currentPath === "/community" ? "page" : undefined}
+              onClick={(event) => navigateTo(event, "/community")}
+            >
+              Community
+            </a>
+          </li>
+        </ul>
+      </nav>
 
       <main>
-        {currentPath === "/" && <HomePage navigateTo={navigateTo} />}
+        {currentPath === homePath && <HomePage navigateTo={navigateTo} />}
         {currentPath === "/about" && <AboutPage />}
         {currentPath === "/gear" && <GearPage navigateTo={navigateTo} />}
         {activeGearPage && <GearDetailPage page={activeGearPage} />}
@@ -126,76 +128,65 @@ function App() {
         {!routes.some((route) => route.path === currentPath) &&
           !activeGearPage && <NotFoundPage navigateTo={navigateTo} />}
       </main>
-    </div>
+    </>
   );
 }
 
 function HomePage({ navigateTo }) {
   return (
     <>
-      <section className="hero">
-        <div className="window">
-          <div className="window-bar" aria-hidden="true">
-            <span></span>
-            <span></span>
-            <span></span>
-          </div>
-          <div className="window-body hero-layout">
-            <div>
-              <p className="eyebrow">Beginner guide</p>
-              <h1>Start bike camping without making it weirdly complicated.</h1>
-              <p className="intro">
-                A friendly starting point for curious riders in Vancouver and
-                British Columbia who want to try a simple overnight trip by
-                bike.
-              </p>
-              <div className="hero-actions">
-                <a
-                  className="button primary"
-                  href="/gear"
-                  onClick={(event) => navigateTo(event, "/gear")}
-                >
-                  Browse gear basics
-                </a>
-                <a
-                  className="button"
-                  href="/community"
-                  onClick={(event) => navigateTo(event, "/community")}
-                >
-                  Find community
-                </a>
-              </div>
-            </div>
+      <PageWindow title="Bikecamping BC" details={["Home", "Beginner Guide"]}>
+        <h1>Start bike camping without making it weirdly complicated.</h1>
+        <p>
+          A friendly starting point for curious riders in Vancouver and British
+          Columbia who want to try a simple overnight trip by bike.
+        </p>
+        <section className="field-row">
+          <a
+            className="btn btn-default"
+            href="/gear"
+            onClick={(event) => navigateTo(event, "/gear")}
+          >
+            Browse gear basics
+          </a>
+          <a
+            className="btn"
+            href="/community"
+            onClick={(event) => navigateTo(event, "/community")}
+          >
+            Find community
+          </a>
+        </section>
+      </PageWindow>
 
-            <div className="map-card" aria-label="Simple bike camping route sketch">
-              <span className="route-dot start"></span>
-              <span className="route-line"></span>
-              <span className="route-dot camp"></span>
-              <p>Short ride. Simple camp. Good snacks.</p>
-            </div>
-          </div>
+      <div className="window">
+        <div className="title-bar">
+          <button aria-label="Close" className="close"></button>
+          <h2 className="title">First Trip Checklist</h2>
+          <button aria-label="Resize" className="resize"></button>
         </div>
-      </section>
-
-      <section className="content-band steps-band">
-        <div className="section-heading">
-          <p className="eyebrow">First trip</p>
-          <h2>Keep the first plan small.</h2>
+        <div className="separator"></div>
+        <div className="window-pane">
+          <p>Keep the first plan small.</p>
+          <ol>
+            {beginnerSteps.map((step) => (
+              <li key={step}>{step}</li>
+            ))}
+          </ol>
         </div>
+      </div>
 
-        <ol className="step-list">
-          {beginnerSteps.map((step) => (
-            <li key={step}>{step}</li>
-          ))}
-        </ol>
-      </section>
+      <div className="standard-dialog center">
+        <h2 className="dialog-text">Short ride. Simple camp. Good snacks.</h2>
+      </div>
     </>
   );
 }
 
 function AboutPage() {
   return (
-    <PageWindow eyebrow="About" title="A practical companion for first trips.">
+    <PageWindow title="About" details={["Project", "Plain Language"]}>
+      <h1>A practical companion for first trips.</h1>
       <p>
         This site will collect plain-language advice about routes, gear,
         planning, and local groups. The content here is placeholder text for
@@ -207,45 +198,35 @@ function AboutPage() {
 
 function GearPage({ navigateTo }) {
   return (
-    <section className="content-band">
-      <div className="section-heading">
-        <p className="eyebrow">Gear</p>
-        <h1>The basic setup areas.</h1>
-        <p>
-          These starter pages will hold plain-language notes about the biggest
-          gear choices for a first bike camping trip.
-        </p>
-      </div>
+    <PageWindow title="Gear" details={["Bikes", "Bags", "Tents"]}>
+      <h1>The basic setup areas.</h1>
+      <p>
+        These starter pages will hold plain-language notes about the biggest
+        gear choices for a first bike camping trip.
+      </p>
 
-      <div className="gear-grid">
-        {gearPages.map((item) => (
-          <article className="window mini-window" key={item.title}>
-            <div className="window-bar" aria-hidden="true">
-              <span></span>
-              <span></span>
-              <span></span>
-            </div>
-            <div className="window-body">
-              <h2>{item.title}</h2>
-              <p>{item.text}</p>
-              <a
-                className="button"
-                href={item.path}
-                onClick={(event) => navigateTo(event, item.path)}
-              >
-                Open {item.title.toLowerCase()}
-              </a>
-            </div>
-          </article>
-        ))}
-      </div>
-    </section>
+      {gearPages.map((item) => (
+        <section key={item.title}>
+          <h2>{item.title}</h2>
+          <p>{item.text}</p>
+          <a
+            className="btn"
+            href={item.path}
+            onClick={(event) => navigateTo(event, item.path)}
+          >
+            Open {item.title.toLowerCase()}
+          </a>
+          <hr />
+        </section>
+      ))}
+    </PageWindow>
   );
 }
 
 function GearDetailPage({ page }) {
   return (
-    <PageWindow eyebrow="Gear" title={page.title}>
+    <PageWindow title={page.title} details={["Gear", "Draft Content"]}>
+      <h1>{page.title}</h1>
       <p>{page.text}</p>
       <p>
         This page is ready for your notes, photos, examples, and beginner tips
@@ -257,10 +238,8 @@ function GearDetailPage({ page }) {
 
 function CommunityPage() {
   return (
-    <PageWindow
-      eyebrow="Community"
-      title="Riding with others can make starting easier."
-    >
+    <PageWindow title="Community" details={["Groups", "Resources"]}>
+      <h1>Riding with others can make starting easier.</h1>
       <p>
         This section will eventually list local riding groups, workshops, and
         beginner-friendly resources. For now it marks the home for that future
@@ -272,15 +251,16 @@ function CommunityPage() {
 
 function NotFoundPage({ navigateTo }) {
   return (
-    <PageWindow eyebrow="Missing page" title="That page is not here yet.">
+    <PageWindow title="Missing Page" details={["404", "Not Found"]}>
+      <h1>That page is not here yet.</h1>
       <p>
         The site does not have content for this address yet. Head back home and
         keep exploring from there.
       </p>
       <a
-        className="button primary"
-        href="/"
-        onClick={(event) => navigateTo(event, "/")}
+        className="btn btn-default"
+        href={homePath}
+        onClick={(event) => navigateTo(event, homePath)}
       >
         Back home
       </a>
@@ -288,21 +268,21 @@ function NotFoundPage({ navigateTo }) {
   );
 }
 
-function PageWindow({ eyebrow, title, children }) {
+function PageWindow({ title, details, children }) {
+  // This markup follows System.css window examples: title bar, details bar, pane.
   return (
-    <section className="page-section">
-      <div className="window">
-        <div className="window-bar" aria-hidden="true">
-          <span></span>
-          <span></span>
-          <span></span>
-        </div>
-        <div className="window-body page-window-body">
-          <p className="eyebrow">{eyebrow}</p>
-          <h1>{title}</h1>
-          <div className="page-copy">{children}</div>
-        </div>
+    <section className="window">
+      <div className="title-bar">
+        <button aria-label="Close" className="close"></button>
+        <h1 className="title">{title}</h1>
+        <button aria-label="Resize" className="resize"></button>
       </div>
+      <div className="details-bar">
+        {details.map((detail) => (
+          <span key={detail}>{detail}</span>
+        ))}
+      </div>
+      <div className="window-pane">{children}</div>
     </section>
   );
 }
